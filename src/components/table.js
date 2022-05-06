@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
-
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 
 const ListTable = () => {
@@ -43,6 +43,18 @@ const ListTable = () => {
       headerName: false,
       width: 100,
       renderCell: (params) => <Avatar src={params.value} />,
+    },
+    {
+      renderCell: () => (
+        <Button
+          onClick={handleClickOpen}
+          variant="contained"
+          color="primary"
+          size="small"
+          style={{ marginLeft: 16 }}>
+          editar
+        </Button>
+      ),
     },
   ];
 
