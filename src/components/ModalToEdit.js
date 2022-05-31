@@ -18,7 +18,7 @@ const FormDialog = ({ isOpen, closeModal, user }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={closeModal}>Save</Button>
-          <Button onClick={closeModal}>Delete</Button>
+          <Button onClick={closeModal}>Eliminar</Button>
         </DialogActions>
       </Dialog>
     </div>
