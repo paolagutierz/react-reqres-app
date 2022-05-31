@@ -4,9 +4,26 @@ import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import ModalToEdit from "./ModalToEdit";
 
 const ListTable = () => {
   const [rows, setRows] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [id, setId] = useState(0);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setId(0);
+  };
+
+  const handleEdit = (idToEdit) => {
+    handleClickOpen();
+    setId(idToEdit);
+  };
 
   useEffect(() => {
     loadData();
@@ -50,7 +67,8 @@ const ListTable = () => {
           variant="contained"
           color="primary"
           size="small"
-          style={{ marginLeft: 16 }}>
+          style={{ marginLeft: 16 }}
+          onClick={() => handleEdit(4)}>
           editar
         </Button>
       ),
@@ -58,21 +76,28 @@ const ListTable = () => {
   ];
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        height: 500,
-        width: 700,
-        mt: 5,
-      }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        rowsPerPageOptions={[20]}
-        pagination
+    <>
+      <ModalToEdit
+        isOpen={open}
+        closeModal={handleClose}
+        user={rows.filter((row) => row.id == id)[0]}
       />
-    </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          height: 500,
+          width: 700,
+          mt: 5,
+        }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          rowsPerPageOptions={[20]}
+          pagination
+        />
+      </Box>
+    </>
   );
 };
 export default ListTable;

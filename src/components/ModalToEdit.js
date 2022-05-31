@@ -1,8 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Form from "./formToEdit";
-import axios from "axios";
+import Form from "./FormToEdit";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -11,43 +8,21 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+const FormDialog = ({ isOpen, closeModal, user }) => {
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Modificar Usuario</DialogTitle>
+      <Dialog open={isOpen} onClose={closeModal}>
+        <DialogTitle>Edit User</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            <Form />
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
+          <Form user={user} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Aceptar</Button>
-          <Button onClick={handleClose}>Eliminar</Button>
+          <Button onClick={closeModal}>Save</Button>
+          <Button onClick={closeModal}>Delete</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
+
+export default FormDialog;
