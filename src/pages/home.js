@@ -1,11 +1,13 @@
 import React from "react";
-import Page from "../components/page";
-import ListTable from "../components/table";
+import Page from "../components/Page";
+import ListTable from "../components/ListTable";
+import FormToEdit from "../components/FormToEdit";
 
 const Home = () => {
   return (
     <Page>
       <ListTable />
+      <FormToEdit />
     </Page>
   );
 };

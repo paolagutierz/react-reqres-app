@@ -47,7 +47,6 @@ const ListTable = () => {
     {
       renderCell: () => (
         <Button
-          onClick={handleClickOpen}
           variant="contained"
           color="primary"
           size="small"

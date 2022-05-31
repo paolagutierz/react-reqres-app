@@ -1,7 +1,25 @@
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 export default function FormPropsTextFields() {
+  const { id } = useParams();
+  const [user, SetUser] = React.useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const response = await axios.put(`https://reqres.in/api/users/${id}`);
+    const toEdit = [response.data].map((user, i) => {
+      return { id: i + 1, ...user };
+    });
+    SetUser(toEdit.data);
+  };
+
   return (
     <Box
       component="form"
